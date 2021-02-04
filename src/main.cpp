@@ -14,6 +14,7 @@ vex::motor FR = vex::motor(PORT10);
 vex::motor FL = vex::motor(PORT1);
 vex::motor BR = vex::motor(PORT20);
 vex::motor BL = vex::motor(PORT11);
+vex::motor arm = vex::motor(PORT9);
 vex::controller Controller = vex::controller();
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
@@ -75,9 +76,15 @@ void usercontrol(void) {
     FL.spin(vex::directionType::fwd, (Controller.Axis2.value() + Controller.Axis4.value())/2, vex::velocityUnits::pct);
     BR.spin(vex::directionType::fwd, (Controller.Axis2.value() - Controller.Axis4.value())/2, vex::velocityUnits::pct);
     BL.spin(vex::directionType::fwd, (Controller.Axis2.value() + Controller.Axis4.value())/2, vex::velocityUnits::pct);
-
     
+    while(Controller.ButtonR1.pressing()) {
+      arm.spin(directionType::fwd, 10, velocityUnits::pct);
+    }
 
+    while(Controller.ButtonR2.pressing()) {
+      arm.spin(directionType::fwd, -10, velocityUnits::pct);
+    }
+  
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
   }
