@@ -7,11 +7,15 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// ---- END VEXCODE CONFIGURED DEVICES ----
-
 #include "vex.h"
-#include "drive.h"
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+vex::motor FR = vex::motor(PORT10);
+vex::motor FL = vex::motor(PORT1);
+vex::motor BR = vex::motor(PORT20);
+vex::motor BL = vex::motor(PORT11);
+vex::controller Controller = vex::controller();
+// ---- END VEXCODE CONFIGURED DEVICES ----
 
 using namespace vex;
 
@@ -67,7 +71,12 @@ void autonomous(void) {
 void usercontrol(void) {
   // User control code here, inside the loop
   while (1) {
-    mtr_ctl(); // Call x-drive control code
+    FR.spin(vex::directionType::fwd, (Controller.Axis2.value() - Controller.Axis4.value())/2, vex::velocityUnits::pct);
+    FL.spin(vex::directionType::fwd, (Controller.Axis2.value() + Controller.Axis4.value())/2, vex::velocityUnits::pct);
+    BR.spin(vex::directionType::fwd, (Controller.Axis2.value() - Controller.Axis4.value())/2, vex::velocityUnits::pct);
+    BL.spin(vex::directionType::fwd, (Controller.Axis2.value() + Controller.Axis4.value())/2, vex::velocityUnits::pct);
+
+    
 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.

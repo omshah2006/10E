@@ -8,4 +8,9 @@ extern controller Controller;
  *
  * This should be called at the start of your int main function.
  */
+ 
+//vex::controller Controller = vex::controller();
+
+//FR = front-right, FL = front-left, BR = back-right, BL = back-left
+
 void vexcodeInit(void);
