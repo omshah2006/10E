@@ -12,8 +12,8 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 vex::motor FR = vex::motor(PORT10);
 vex::motor FL = vex::motor(PORT1);
-vex::motor BR = vex::motor(PORT20);
-vex::motor BL = vex::motor(PORT11);
+vex::motor BR = vex::motor(PORT19);
+vex::motor BL = vex::motor(PORT12);
 vex::motor arm = vex::motor(PORT9);
 vex::controller Controller = vex::controller();
 // ---- END VEXCODE CONFIGURED DEVICES ----
@@ -53,10 +53,113 @@ void pre_auton(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
+
+
 void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
+
+  FR.spin(directionType::rev, 100, percentUnits::pct); //forward
+  BR.spin(directionType::rev, 100, percentUnits::pct);
+  FL.spin(directionType::fwd, 100, percentUnits::pct);
+  BL.spin(directionType::fwd, 100, percentUnits::pct);
+
+  vex::task::sleep(1900);
+
+  FR.stop();
+  BR.stop();
+  FL.stop();
+  BL.stop();
+  vex::task::sleep(300);
+
+  FR.spin(directionType::rev, 100, percentUnits::pct); //turn
+  BR.spin(directionType::rev, 100, percentUnits::pct);
+  FL.spin(directionType::rev, 100, percentUnits::pct);
+  BL.spin(directionType::rev, 100, percentUnits::pct);
+
+  vex::task::sleep(200);
+
+  FR.stop();
+  BR.stop();
+  FL.stop();
+  BL.stop();
+  vex::task::sleep(300);
+
+  FR.spin(directionType::rev, 100, percentUnits::pct); //forward
+  BR.spin(directionType::rev, 100, percentUnits::pct);
+  FL.spin(directionType::fwd, 100, percentUnits::pct);
+  BL.spin(directionType::fwd, 100, percentUnits::pct);
+
+  vex::task::sleep(500);
+  FR.stop();
+  BR.stop();
+  FL.stop();
+  BL.stop();
+  vex::task::sleep(300);
+
+  FR.spin(directionType::fwd, 100, percentUnits::pct); //right
+  BR.spin(directionType::fwd, 100, percentUnits::pct);
+  FL.spin(directionType::fwd, 100, percentUnits::pct);
+  BL.spin(directionType::fwd, 100, percentUnits::pct);
+
+  vex::task::sleep(700);
+  FR.stop();
+  BR.stop();
+  FL.stop();
+  BL.stop();
+  vex::task::sleep(400);
+
+  FR.spin(directionType::rev, 100, percentUnits::pct); //forward
+  BR.spin(directionType::rev, 100, percentUnits::pct);
+  FL.spin(directionType::fwd, 100, percentUnits::pct);
+  BL.spin(directionType::fwd, 100, percentUnits::pct);
+
+  vex::task::sleep(200);
+  FR.stop();
+  BR.stop();
+  FL.stop();
+  BL.stop();
+  vex::task::sleep(300);
+
+  FR.spin(directionType::rev, 100, percentUnits::pct); //left
+  BR.spin(directionType::rev, 100, percentUnits::pct);
+  FL.spin(directionType::rev, 100, percentUnits::pct);
+  BL.spin(directionType::rev, 100, percentUnits::pct);
+
+  vex::task::sleep(700);
+
+  FR.stop();
+  BR.stop();
+  FL.stop();
+  BL.stop();
+  vex::task::sleep(400);
+
+  FR.spin(directionType::rev, 100, percentUnits::pct); //forward
+  BR.spin(directionType::rev, 100, percentUnits::pct);
+  FL.spin(directionType::fwd, 100, percentUnits::pct);
+  BL.spin(directionType::fwd, 100, percentUnits::pct);
+
+  vex::task::sleep(200);
+  FR.stop();
+  BR.stop();
+  FL.stop();
+  BL.stop();
+  vex::task::sleep(300);
+
+  FR.spin(directionType::fwd, 100, percentUnits::pct); //left
+  BR.spin(directionType::fwd, 100, percentUnits::pct);
+  FL.spin(directionType::fwd, 100, percentUnits::pct);
+  BL.spin(directionType::fwd, 100, percentUnits::pct);
+
+  vex::task::sleep(700);
+  FR.stop();
+  BR.stop();
+  FL.stop();
+  BL.stop();
+  vex::task::sleep(400);
+
+
 }
 
 /*---------------------------------------------------------------------------*/
@@ -72,10 +175,10 @@ void autonomous(void) {
 void usercontrol(void) {
   // User control code here, inside the loop
   while (1) {
-    FR.spin(vex::directionType::fwd, (Controller.Axis2.value() - Controller.Axis4.value())/2, vex::velocityUnits::pct);
-    FL.spin(vex::directionType::fwd, (Controller.Axis2.value() + Controller.Axis4.value())/2, vex::velocityUnits::pct);
-    BR.spin(vex::directionType::fwd, (Controller.Axis2.value() - Controller.Axis4.value())/2, vex::velocityUnits::pct);
-    BL.spin(vex::directionType::fwd, (Controller.Axis2.value() + Controller.Axis4.value())/2, vex::velocityUnits::pct);
+    FR.spin(vex::directionType::fwd, (Controller.Axis1.value() - Controller.Axis3.value()), vex::velocityUnits::pct);
+    FL.spin(vex::directionType::fwd, (Controller.Axis1.value() + Controller.Axis3.value()), vex::velocityUnits::pct);
+    BR.spin(vex::directionType::fwd, (Controller.Axis1.value() - Controller.Axis3.value()), vex::velocityUnits::pct);
+    BL.spin(vex::directionType::fwd, (Controller.Axis1.value() + Controller.Axis3.value()), vex::velocityUnits::pct);
     
     while(Controller.ButtonR1.pressing()) {
       arm.spin(directionType::fwd, 10, velocityUnits::pct);
