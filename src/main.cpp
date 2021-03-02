@@ -14,7 +14,8 @@ vex::motor FR = vex::motor(PORT10);
 vex::motor FL = vex::motor(PORT1);
 vex::motor BR = vex::motor(PORT19);
 vex::motor BL = vex::motor(PORT12);
-vex::motor arm = vex::motor(PORT9);
+vex::motor rintake = vex::motor(PORT15);
+vex::motor lintake = vex::motor(PORT16);
 vex::controller Controller = vex::controller();
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
@@ -181,11 +182,13 @@ void usercontrol(void) {
     BL.spin(vex::directionType::fwd, (Controller.Axis1.value() + Controller.Axis3.value()), vex::velocityUnits::pct);
     
     while(Controller.ButtonR1.pressing()) {
-      arm.spin(directionType::fwd, 10, velocityUnits::pct);
+      rintake.spin(directionType::fwd, 20, velocityUnits::pct);
+      lintake.spin(directionType::fwd, -20, velocityUnits::pct);
     }
 
     while(Controller.ButtonR2.pressing()) {
-      arm.spin(directionType::fwd, -10, velocityUnits::pct);
+      rintake.spin(directionType::fwd, -20, velocityUnits::pct);
+      lintake.spin(directionType::fwd, 20, velocityUnits::pct);
     }
   
     wait(20, msec); // Sleep the task for a short amount of time to
