@@ -181,12 +181,12 @@ void usercontrol(void) {
     BR.spin(vex::directionType::fwd, (Controller.Axis1.value() - Controller.Axis3.value()), vex::velocityUnits::pct);
     BL.spin(vex::directionType::fwd, (Controller.Axis1.value() + Controller.Axis3.value()), vex::velocityUnits::pct);
     
-    while(Controller.ButtonR1.pressing()) {
+    if(Controller.ButtonR1.pressing()) {
       rintake.spin(directionType::fwd, 20, velocityUnits::pct);
       lintake.spin(directionType::fwd, -20, velocityUnits::pct);
     }
 
-    while(Controller.ButtonR2.pressing()) {
+    if(Controller.ButtonR2.pressing()) {
       rintake.spin(directionType::fwd, -20, velocityUnits::pct);
       lintake.spin(directionType::fwd, 20, velocityUnits::pct);
     }
